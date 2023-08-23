@@ -216,6 +216,7 @@ func getAllWordRanks(indexedDict RankedDictionary, allLetterRanks []LetterCount)
 	for wordIndex, wordValue := range indexedDict {
 		var wordDistance int
 		if wordIndex <= printLimit {
+				//if (wordValue.word == "saree" || wordValue.word == "sores" || wordValue.word == "soras" || wordValue.word == "cores" || wordValue.word == "soree" || wordValue.word == "saris" || wordValue.word == "seres" || wordValue.word == "coree" ) {
 			fmt.Printf("\n[%v] %v -", wordIndex, wordValue.word)
 		}
 		for letterIndex, letter := range wordValue.word {
@@ -231,7 +232,35 @@ func getAllWordRanks(indexedDict RankedDictionary, allLetterRanks []LetterCount)
 		//update index with distance
 		indexedDict[wordIndex].rank = wordDistance
 	}
+	
+	//Testing results to ensure that the distance is correct
+	//{saree 1} {sores 1} {cares 1} {soras 2} 
+	// could be optimized to reduce repeated lines.. but this is just for validation
+	fmt.Println("\n\nLoc8.1 - printing only the top items for testing")
+	for wordIndex, wordValue := range indexedDict {
+		var wordDistance int
+		//if wordIndex <= printLimit {
+		if (wordValue.word == "saree" || wordValue.word == "sores" || wordValue.word == "cares" || wordValue.word == "soras" ) {
+			fmt.Printf("\n[%v] %v -", wordIndex, wordValue.word)
+		}
+		for letterIndex, letter := range wordValue.word {
+			//fmt.Printf("[%v]%v-%v . ",letterIndex,string(letter), allLetterMapArray[letterIndex])
+			//if wordIndex <= printLimit {
+			if (wordValue.word == "saree" || wordValue.word == "sores" || wordValue.word == "cares" || wordValue.word == "soras" ) {
 
+				fmt.Printf("[%v]%v-%v . ", letterIndex, string(letter), allLetterMapArray[letterIndex][byte(letter)])
+			}
+			wordDistance = wordDistance + allLetterMapArray[letterIndex][byte(letter)]
+		}
+		//if wordIndex <= printLimit {
+		if (wordValue.word == "saree" || wordValue.word == "sores" || wordValue.word == "cares" || wordValue.word == "soras" ) {
+
+			fmt.Printf("      wordDistance = %v", wordDistance)
+		}
+		//update index with distance
+		indexedDict[wordIndex].rank = wordDistance
+	}
+	
 	fmt.Println("\n\nLoc10 - new indexedDict with distance[0:printLimit]")
 	fmt.Println(indexedDict[0:printLimit])
 
@@ -313,6 +342,9 @@ func main() {
 	//test()
 	
 	var initialRankedDictionary = getFirstWordRanks()
+
+	fmt.Println("")
+	fmt.Println("The following words are ranked as the best initial guesses for Wordle: ")
 	fmt.Println(initialRankedDictionary[0:printLimit])
 
 
