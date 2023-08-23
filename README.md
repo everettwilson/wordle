@@ -16,18 +16,18 @@ The Wordle First Guess Optimizer analyzes a dictionary of all 5-letter words and
 
 1. **Installation:**
     ```bash
-    git clone https://github.com/your-github-username/wordle-first-guess-optimizer.git
-    cd wordle-first-guess-optimizer
+    git clone https://github.com/everettwilson/wordle.git
+    cd wordle
     ```
 
 2. **Compile (if you haven't compiled it yet):**
     ```bash
-    go build optimizer.go
+    go build wordle_first_word.go
     ```
 
 3. **Run the Script:**
     ```bash
-    ./optimizer
+    ./wordle_first_word
     ```
 
     Upon execution, the script will print the top 10 recommended starting words for Wordle based on the analyzed dictionary.
